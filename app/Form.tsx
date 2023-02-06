@@ -19,13 +19,14 @@ export default function FormPost() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="flex justify-center" onSubmit={handleSubmit}>
       <input
+        className="border"
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button type="submit">Create a new post</button>
+      <button className="bg-black text-white px-2 py-1 w-fit" type="submit">Post</button>
     </form>
   )
 }
