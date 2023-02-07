@@ -21,7 +21,7 @@ export default function FormPost() {
   return (
     <form className="flex justify-center" onSubmit={handleSubmit}>
       <input
-        className="border"
+        className="border px-2"
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
