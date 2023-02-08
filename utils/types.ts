@@ -1,9 +1,10 @@
-export type PostProps = {
-    id: string;
-    title: string;
-}[]
-
-// PRISMA
-export type PrismaPostProps = {
+export interface BaseType {
     title: string
+    content: string
 }
+
+// HOME
+export interface PostProps extends BaseType {
+    id: string
+}
+
