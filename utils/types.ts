@@ -5,6 +5,6 @@ export interface BaseType {
 
 // HOME
 export interface PostProps extends BaseType {
-    id: string
+    id: number
 }
 

@@ -3,9 +3,9 @@
 import { PostProps } from "@/utils/types"
 
 export default function DeletePost({ id }: Pick<PostProps, "id">) {
-    async function deletePost(postId: string) {
+    async function deletePost(postId: number) {
       try {
-        fetch(`http://localhost:3000/api/post/${postId}`, {
+        fetch(`http://localhost:3000/api/post/${postId.toString()}`, {
           method: "DELETE",
         })
       } catch (err) {
