@@ -1,13 +1,20 @@
 "use client"
 
 import { PostProps } from "@/utils/types"
+import { useRouter } from "next/navigation"
 
 export default function DeletePost({ id }: Pick<PostProps, "id">) {
+    const router = useRouter()
+  
     async function deletePost(postId: number) {
       try {
-        fetch(`http://localhost:3000/api/post/${postId.toString()}`, {
+        const res = await fetch(`http://localhost:3000/api/post/${postId}`, {
+          headers: { 'Content-Type': 'application/json'},
           method: "DELETE",
         })
+        const data = res.json()
+        console.log(data)
+        router.refresh()
       } catch (err) {
         console.log(err)
       }
