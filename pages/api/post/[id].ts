@@ -7,15 +7,37 @@ export default async function handler(
   res: NextApiResponse
 ) {
     try {
-        const postId = parseInt(req.query.id,10)
+        const postId = parseInt(req.query.id as string,10)
         if (req.method === "DELETE") {
             const data = await prisma.post.delete({
                 where: { id: postId },
             })
             res.json(data)
             return res.status(200).json({ message: "Post deleted", data })
-        } else {
-            return res.status(500).json({ message: "Couldn't delete post" })
+        }
+        else if (req.method === "PUT") { 
+            const post = JSON.parse(req.body)
+            const data = await prisma.post.update({
+                where: { id: postId },
+                data: {
+                    title: post.title,
+                    content: post.content,
+                },
+            })
+            res.json(data)
+            return res.status(200).json({ message: "Post updated", data })
+        }
+        else if (req.method === "GET") {
+            const data = await prisma.post.findUnique({
+                where: {
+                    id: postId,
+                }
+            })
+            res.json(data)
+            return res.status(200).json({ message: "Post fetched", data })
+        }
+        else {
+            return res.status(500).json({ message: `Couldn't ${req.method} post` })
         }
     } catch (err) {
         console.log(err)

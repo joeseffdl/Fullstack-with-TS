@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useContext } from "react"
+import { FormContext } from "@/utils/DataContext"
+import { useRouter, usePathname } from "next/navigation"
 
 export default function FormPost() {
   const router = useRouter()
-  const [form, setForm] = useState({ title: "", content: "" })
+  const { form, setForm } = useContext(FormContext)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -14,7 +15,7 @@ export default function FormPost() {
       body: JSON.stringify({ title: form.title, content: form.content }),
     })
     const res = await post.json()
-    setForm({ title: "", content: "" })
+    setForm({ id: 0, title: "", content: "" })
     router.refresh()
     if (!res.ok) console.log(res.message)
   }
@@ -35,7 +36,7 @@ export default function FormPost() {
         onChange={(e) => setForm({...form, content: e.target.value })}
       />
       <div className="flex justify-end">
-        <button className="bg-black text-white px-2 py-1 w-fit " type="submit">Post</button>
+        <button className="bg-black text-white px-2 py-1 w-fit " type="submit">{usePathname() != "/" ? "Update" :"Post"}</button>
       </div>
     </form>
   )

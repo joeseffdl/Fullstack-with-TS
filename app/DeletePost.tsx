@@ -13,7 +13,6 @@ export default function DeletePost({ id }: Pick<PostProps, "id">) {
           method: "DELETE",
         })
         const data = res.json()
-        console.log(data)
         router.refresh()
       } catch (err) {
         console.log(err)
