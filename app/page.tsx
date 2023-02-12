@@ -16,24 +16,38 @@ export default async function Home() {
   const posts: PostProps[] = await getPosts()
   return (
     <FormProvider>
-      <div className="min-h-screen bg-yellow-300 py-8 px-48">
+      <div className="min-h-screen bg-rose-300 py-8 px-48">
         <div className="">
-          <h1 className="text-center text-2xl font-bold mb-3">Post It</h1>
+          <h1 className="text-center text-lg font-bold text-gray-900 mb-3">
+            Post It
+          </h1>
           <Form />
-          {posts.map((post) => (
-            <div key={post.id} className="py-4">
-              <h1 className="text-2xl font-bold">{post.title}</h1>
-              <p className="font-semibold">{post.content}</p>
-              <div className="flex">
-                <Link href={`/${post.id}`}>
-                  <div className="bg-blue-500 text-white font-semibold p-2">
-                    Update
+          <div className="grid grid-cols-4 gap-y-8 drop-shadow-2xl justify-items-center">
+            {posts.map((post) => (
+              <div
+                key={post.id}
+                className="flex flex-col w-60 h-60 px-5 bg-green-200 rounded-xl drop-shadow-xl gap-y-4"
+              >
+                <div className="relative h-full mt-4">
+                  <h1 className="text-2xl font-semibold">{post.title}</h1>
+                  <ul className="list-disc list-inside mt-2">
+                    <li>{post.content}</li>
+                  </ul>
+                  <div className="absolute flex gap-2 top-1 right-1">
+                    {/* <Link href={`/${post.id}`}>
+                      <div className="bg-blue-500 text-white font-semibold p-2">
+                        Update
+                      </div>
+                    </Link> */}
+                    <DeletePost id={post.id} />
                   </div>
-                </Link>
-                <DeletePost id={post.id} />
+                </div>
+                <div className="border-t-2 border-yellow-900 h-1/3 text-sm">
+                  Likes 
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </FormProvider>

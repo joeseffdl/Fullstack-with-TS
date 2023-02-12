@@ -20,6 +20,6 @@ export default function DeletePost({ id }: Pick<PostProps, "id">) {
     }
 
     return (
-        <button className="bg-red-500 text-white font-semibold p-2" onClick={() => deletePost(id)}>X</button>
+        <button className="bg-transparent border border-red-500 rounded-full text-red-500 text-sm font-semibold px-2 text-center" onClick={() => deletePost(id)}>X</button>
     )
 }
