@@ -9,7 +9,6 @@ export default function DeletePost({ id }: Pick<PostProps, "id">) {
     async function deletePost(postId: number) {
       try {
         const res = await fetch(`http://localhost:3000/api/post/${postId}`, {
-          headers: { 'Content-Type': 'application/json'},
           method: "DELETE",
         })
         const data = res.json()

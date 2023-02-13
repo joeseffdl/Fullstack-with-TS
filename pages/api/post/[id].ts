@@ -27,15 +27,6 @@ export default async function handler(
             res.json(data)
             return res.status(200).json({ message: "Post updated", data })
         }
-        else if (req.method === "GET") {
-            const data = await prisma.post.findUnique({
-                where: {
-                    id: postId,
-                }
-            })
-            res.json(data)
-            return res.status(200).json({ message: "Post fetched", data })
-        }
         else {
             return res.status(500).json({ message: `Couldn't ${req.method} post` })
         }

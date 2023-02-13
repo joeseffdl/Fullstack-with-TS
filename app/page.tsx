@@ -1,8 +1,9 @@
+import UpdatePost from "@/components/UpdatePost"
 import FormProvider from "@/utils/DataContext"
 import { PostProps } from "@/utils/types"
 import Link from "next/link"
-import DeletePost from "./DeletePost"
-import Form from "./Form"
+import DeletePost from "../components/DeletePost"
+import Form from "../components/Form"
 
 async function getPosts() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getPosts`)
@@ -33,17 +34,13 @@ export default async function Home() {
                   <ul className="list-disc list-inside mt-2">
                     <li>{post.content}</li>
                   </ul>
-                  <div className="absolute flex gap-2 top-1 right-1">
-                    {/* <Link href={`/${post.id}`}>
-                      <div className="bg-blue-500 text-white font-semibold p-2">
-                        Update
-                      </div>
-                    </Link> */}
+                  <div className="absolute flex gap-2 bottom-0 right-1">
+                    <UpdatePost id={post.id} />
                     <DeletePost id={post.id} />
                   </div>
                 </div>
                 <div className="border-t-2 border-yellow-900 h-1/3 text-sm">
-                  Likes 
+                  Likes
                 </div>
               </div>
             ))}
