@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
     try {
-        const postId = parseInt(req.query.id as string,10)
+        const postId = (req.query.id)
         if (req.method === "DELETE") {
             const data = await prisma.post.delete({
                 where: { id: postId },

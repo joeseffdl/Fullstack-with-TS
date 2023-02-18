@@ -15,7 +15,7 @@ export default function FormPost() {
       body: JSON.stringify({ title: form.title, content: form.content }),
     })
     const res = await post.json()
-    setForm({ id: 0, title: "", content: "" })
+    setForm({ id: "", title: "", content: "" })
     router.refresh()
     if (!res.ok) console.log(res.message)
   }

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 export default function DeletePost({ id }: Pick<PostProps, "id">) {
     const router = useRouter()
   
-    async function deletePost(postId: number) {
+    async function deletePost(postId: string) {
       try {
         const res = await fetch(`http://localhost:3000/api/post/${postId}`, {
           method: "DELETE",

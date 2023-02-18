@@ -1,7 +1,6 @@
 import UpdatePost from "@/components/UpdatePost"
 import FormProvider from "@/utils/DataContext"
 import { PostProps } from "@/utils/types"
-import Link from "next/link"
 import DeletePost from "../components/DeletePost"
 import Form from "../components/Form"
 
@@ -17,7 +16,6 @@ export default async function Home() {
   const posts: PostProps[] = await getPosts()
   return (
     <FormProvider>
-      <div className="min-h-screen bg-rose-300 py-8 px-48">
         <div className="">
           <h1 className="text-center text-lg font-bold text-gray-900 mb-3">
             Post It
@@ -46,7 +44,6 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </div>
     </FormProvider>
   )
 }
