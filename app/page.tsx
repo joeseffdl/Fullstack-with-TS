@@ -1,19 +1,23 @@
-import UpdatePost from "@/components/UpdatePost"
+import DisplayPosts from "@/components/DisplayPosts"
 import FormProvider from "@/utils/DataContext"
 import { PostProps } from "@/utils/types"
-import DeletePost from "../components/DeletePost"
+import axios from "axios"
 import Form from "../components/Form"
+import { useQuery } from "@tanstack/react-query"
 
-async function getPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getPosts`)
-  if (!res.ok) {
-    console.log(res)
-  }
-  return res.json()
+const getPosts = async () => { 
+  const response = await axios.get("/api/posts/getPosts")
+  return response.data
 }
 
-export default async function Home() {
-  const posts: PostProps[] = await getPosts()
+export default function Home() {
+  const { data, isLoading, error } = useQuery({
+    queryFn: getPosts,
+    queryKey: ["posts"],
+  })
+  if (error) return error
+  if (isLoading) return <div>Loading...</div>
+  console.log(data)
   return (
     <FormProvider>
         <div className="">
@@ -22,26 +26,9 @@ export default async function Home() {
           </h1>
           <Form />
           <div className="grid grid-cols-4 gap-y-8 drop-shadow-2xl justify-items-center">
-            {posts.map((post) => (
-              <div
-                key={post.id}
-                className="flex flex-col w-60 h-60 px-5 bg-green-200 rounded-xl drop-shadow-xl gap-y-4"
-              >
-                <div className="relative h-full mt-4">
-                  <h1 className="text-2xl font-semibold">{post.title}</h1>
-                  <ul className="list-disc list-inside mt-2">
-                    <li>{post.content}</li>
-                  </ul>
-                  <div className="absolute flex gap-2 bottom-0 right-1">
-                    <UpdatePost id={post.id} />
-                    <DeletePost id={post.id} />
-                  </div>
-                </div>
-                <div className="border-t-2 border-yellow-900 h-1/3 text-sm">
-                  Likes
-                </div>
-              </div>
-            ))}
+            {/* {data?.map((post: PostProps) => (
+              <DisplayPosts {...post} />
+            ))} */}
           </div>
         </div>
     </FormProvider>
