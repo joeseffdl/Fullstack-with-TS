@@ -1,6 +1,6 @@
 import DisplayPosts from "@/components/DisplayPosts"
 import FormProvider from "@/utils/DataContext"
-import { PostProps } from "@/utils/types"
+import { GetPostProps, PostProps } from "@/utils/types"
 import axios from "axios"
 import Form from "../components/Form"
 import { useQuery } from "@tanstack/react-query"
@@ -11,9 +11,10 @@ const getPosts = async () => {
 }
 
 export default function Home() {
-  const { data, isLoading, error } = useQuery({
-    queryFn: getPosts,
+  // const data = getPosts()
+  const { data, isLoading, error } = useQuery<GetPostProps[]>({
     queryKey: ["posts"],
+    queryFn: getPosts,
   })
   if (error) return error
   if (isLoading) return "Loading..."
@@ -27,7 +28,15 @@ export default function Home() {
           <Form />
           <div className="grid grid-cols-4 gap-y-8 drop-shadow-2xl justify-items-center">
             {/* {data?.map((post: PostProps) => (
-              <DisplayPosts {...post} />
+              <DisplayPosts 
+                key = {post.id} 
+                name = {post.user.name} 
+                avatar = {post.user.image} 
+                title = {post.title} 
+                content = {post.content} 
+                id = {post.id}
+                comments= {post.comments}
+                />
             ))} */}
           </div>
         </div>

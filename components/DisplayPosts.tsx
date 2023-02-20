@@ -2,9 +2,10 @@
 
 import UpdatePost from "./UpdatePost"
 import DeletePost from "./DeletePost"
-import { PostProps } from "@/utils/types"
+import { DisplayPostProps } from "@/utils/types"
+import Link from "next/link"
 
-export default function DisplayPosts({ id, title, content}: PostProps) {
+export default function DisplayPosts({ key, name, avatar, id, title, content, comments}: DisplayPostProps) {
 
     return (
       <div
@@ -22,6 +23,10 @@ export default function DisplayPosts({ id, title, content}: PostProps) {
           </div>
         </div>
         <div className="border-t-2 border-yellow-900 h-1/3 text-sm">Likes</div>
+        <Link href={`post/${id}`}>
+          <p className="text-sm font-bold text-gray-700">
+            {comments?.length} Comments</p>
+        </Link>
       </div>
     )
 }
