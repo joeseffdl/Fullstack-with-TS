@@ -16,7 +16,7 @@ export default function Home() {
     queryKey: ["posts"],
   })
   if (error) return error
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return "Loading..."
   console.log(data)
   return (
     <FormProvider>
