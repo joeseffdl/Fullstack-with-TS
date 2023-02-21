@@ -2,6 +2,7 @@ import './globals.css'
 import Navigation from './auth/Navigation'
 import { Roboto } from '@next/font/google'
 import QueryWrapper from './auth/QueryWrapper'
+import "@total-typescript/ts-reset"
 
 const roboto = Roboto({
   subsets: ["latin"],
