@@ -26,7 +26,7 @@ export interface DisplayPostProps extends PostProps {
     key: string
     name: string
     avatar: string
-    comments?: {
+    Comment?: {
         createdAt: string
         id: string
         postId: string
