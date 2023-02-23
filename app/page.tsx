@@ -11,14 +11,14 @@ const getPosts = async () => {
 }
 
 export default function Home() {
-  const data = getPosts()
+  // const data = getPosts()
   // const { data, isLoading, error } = useQuery<GetPostProps[]>({
   //   queryKey: ["posts"],
   //   queryFn: getPosts,
   // })
   // if (error) return error
   // if (isLoading) return "Loading..."
-  console.log(data)
+  // console.log(data)
   return (
     <FormProvider>
         <div className="">

@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../auth/[...nextauth]"
+import { authOptions} from "../auth/[...nextauth]"
 import prisma from "../../../prisma/index"
 
 export default async function handler(
@@ -15,6 +15,16 @@ export default async function handler(
             const data = await prisma.user.findUnique({
                 where: {
                     email: session.user?.email,
+                },
+                include: {
+                    Post: {
+                        orderBy: {
+                            createdAt: "desc",
+                        },
+                        include: {
+                            Comment: true,
+                        },
+                    },
                 }
             })
             res.status(200).json(data)
