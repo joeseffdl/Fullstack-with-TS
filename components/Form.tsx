@@ -11,6 +11,7 @@ export default function FormPost() {
   const router = useRouter()
   const { form, setForm } = useContext(FormContext)
   const [isDisabled, setIsDisabled] = useState(false)
+  const queryClient = useQueryClient()
   let toastPostID: string
 
   const { mutate } = useMutation(
@@ -20,9 +21,10 @@ export default function FormPost() {
     }, {
       onSuccess: () => {
         toast.success("Post created!🚀", {id: toastPostID})
+        queryClient.invalidateQueries(["posts"])
         setForm({ id: "", title: "", content: "" })
         setIsDisabled(false)
-        router.refresh()
+        // router.refresh()
     },
       onError: (err) => {
         toast.error("Something went wrong!", {id: toastPostID})
