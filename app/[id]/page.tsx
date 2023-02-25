@@ -1,18 +1,18 @@
 // "use client"
 
-import { ParamsProps, PostProps } from "@/utils/types"
-import Form from "../../components/Form"
+import { ParamsProps, PostProps } from "@/utils/types";
+import Form from "../../components/Form";
 
 async function getPostbyId(id: string) {
-  const res = await fetch(`http:localhost:3000/api/getPostById`)
+  const res = await fetch(`http:localhost:3000/api/getPostById`);
   if (!res.ok) {
-    console.log(res)
+    console.log(res);
   }
-  return res.json()
+  return res.json();
 }
 
 export default async function Page({ params }: ParamsProps) {
-  const post: PostProps[] = await getPostbyId(params.id)
+  const post: PostProps[] = await getPostbyId(params.id);
   return (
     <div className="min-h-screen bg-rose-300 py-8 px-48">
       <Form />
@@ -23,5 +23,5 @@ export default async function Page({ params }: ParamsProps) {
             </div>
       ))} */}
     </div>
-  )
+  );
 }

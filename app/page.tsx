@@ -1,14 +1,14 @@
-import DisplayPosts from "@/components/DisplayPosts"
-import FormProvider from "@/utils/DataContext"
-import { GetPostProps, PostProps } from "@/utils/types"
-import axios from "axios"
-import Form from "../components/Form"
-import { useQuery } from "@tanstack/react-query"
+import DisplayPosts from "@/components/DisplayPosts";
+import FormProvider from "@/utils/DataContext";
+import { GetPostProps, PostProps } from "@/utils/types";
+import axios from "axios";
+import Form from "../components/Form";
+import { useQuery } from "@tanstack/react-query";
 
-const getPosts = async () => { 
-  const response = await axios.get("/api/posts/getPosts")
-  return response.data
-}
+const getPosts = async () => {
+  const response = await axios.get("/api/posts/getPosts");
+  return response.data;
+};
 
 export default function Home() {
   // const data = getPosts()
@@ -21,13 +21,13 @@ export default function Home() {
   // console.log(data)
   return (
     <FormProvider>
-        <div className="">
-          <h1 className="text-center text-lg font-bold text-gray-900 mb-3">
-            Post It
-          </h1>
-          <Form />
-          <div className="grid grid-cols-4 gap-y-8 drop-shadow-2xl justify-items-center">
-            {/* {data?.map((post: PostProps) => (
+      <div className="">
+        <h1 className="mb-3 text-center text-lg font-bold text-gray-900">
+          Post It
+        </h1>
+        <Form />
+        <div className="grid grid-cols-4 justify-items-center gap-y-8 drop-shadow-2xl">
+          {/* {data?.map((post: PostProps) => (
               <DisplayPosts 
                 key = {post.id} 
                 name = {post.user.name} 
@@ -38,8 +38,8 @@ export default function Home() {
                 comments= {post.Comment}
                 />
             ))} */}
-          </div>
         </div>
+      </div>
     </FormProvider>
-  )
+  );
 }
