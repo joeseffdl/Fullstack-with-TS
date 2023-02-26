@@ -13,38 +13,38 @@ const fetchDetails = async (id: string) => {
 };
 
 export default function PostDetail(url: ParamsProps) {
-    const { data, isLoading } = useQuery<PostType[]>({
-        queryKey: ["detail-post"],
-        queryFn: () => fetchDetails(url.params.id),
-    })
+  const { data, isLoading } = useQuery<PostType[]>({
+    queryKey: ["detail-post"],
+    queryFn: () => fetchDetails(url.params.id),
+  });
 
-    if (isLoading) return <div>Loading...</div>
-    
-    return (
-        <div>
-            <Form
-                id={data.id}
-                name={data.user.name}
-                avatar={data.user.image}
-                postTitle={data.title}
-                comments={data.Comment}
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <Form
+        id={data.id}
+        name={data.user.name}
+        avatar={data.user.image}
+        postTitle={data.title}
+        comments={data.Comment}
+      />
+      <AddComment id={data?.id} />
+      {data?.Comment?.map((comment) => (
+        <div key={comment.id} className="my-6 rounded-md bg-white p-8">
+          <div className="flex items-center gap-2">
+            <Image
+              width={24}
+              height={24}
+              src={comment.user?.image}
+              alt="avatar"
             />
-            <AddComment id={data?.id} />
-            {data?.Comment?.map((comment) => (
-                <div key={comment.id} className="my-6 bg-white p-8 rounded-md">
-                    <div className="flex items-center gap-2">
-                        <Image
-                            width={24}
-                            height={24}
-                            src={comment.user?.image}
-                            alt="avatar"
-                        />
-                        <h3 className="font-bold">{comment?.user?.name}</h3>
-                        <h2 className="text-sm">{comment?.createdAt}</h2>
-                    </div>
-                    <div className="py-4">{comment.content}</div>
-                </div>
-            ))}
+            <h3 className="font-bold">{comment?.user?.name}</h3>
+            <h2 className="text-sm">{comment?.createdAt}</h2>
+          </div>
+          <div className="py-4">{comment.content}</div>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
